@@ -11,12 +11,12 @@ It allows developers to deliver, update, and destroy data that is stored in the 
 == Setup
 Add *built_in_key* to your model:
 
-    generate migration AddBuiltInKeyToYourModel built_in_key:string
+    ruby script/rails generate migration AddBuiltInKeyToYourModel built_in_key:string
 
-Require *BuiltInData* in your model:
+Include *BuiltInData* in your model:
 
     class YourModel < ActiveRecord::Base
-      require BuiltInData
+      include BuiltInData
     end
 
 Setup your data:

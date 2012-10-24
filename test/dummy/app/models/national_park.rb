@@ -1,5 +1,5 @@
 class NationalPark < ActiveRecord::Base
-  require BuiltInData
+  include BuiltInData
   
-  attr_accessible :established, :name, :url
+  attr_accessible :established, :name, :url, :built_in_key
 end

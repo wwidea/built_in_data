@@ -1,3 +1,45 @@
-= BuiltInData
+=BuiltInData
 
-This project rocks and uses MIT-LICENSE.
+BuiltInData is a simple tool for loading and updating data in a Rails application.
+
+Objects are stored in the database with a *built_in_key* that is used on subsequent loads to update or remove the object.
+Items in the table without a *built_in_key* will not be modified or removed.
+
+== Setup
+Add *built_in_key* to your model:
+
+    generate migration AddBuiltInKeyToYourModel built_in_key:string
+
+Require *BuiltInData* in your model:
+
+    class YourModel < ActiveRecord::Base
+      require BuiltInData
+    end
+
+Setup your data:
+There are two methods to load data
+
+* assign to *built_in_data_attributes*
+    YourModel.built_in_data_attributes = {
+      :glacier => {
+        :name => 'Glacier National Park',
+      },
+  
+      :yellowstone => {
+        :name => 'Yellowstone National Park',
+      }
+    }
+
+
+* OR create a yaml load file in *db/built_in_data* with the name of the model (ie. national_parks.yml)
+
+    glacier:
+      name: Glacier National Park
+
+    yellowstone:
+     name: Yellowstone National Park
+
+
+Load the data with *load_built_in_data!*:
+
+    YourModel.load_built_in_data!

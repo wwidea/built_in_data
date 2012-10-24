@@ -1,0 +1,9 @@
+yellowstone:
+  name: Yellowstone National Park
+  established: 1872-03-01
+  url: 'http://www.nps.gov/yell/index.htm'
+
+glacier:
+  name: Glacier National Park
+  established: 1910-05-11
+  url: 'http://www.nps.gov/glac/index.htm'

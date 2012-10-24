@@ -5,6 +5,9 @@ BuiltInData is a simple tool for loading and updating data in a Rails applicatio
 Objects are stored in the database with a *built_in_key* that is used on subsequent loads to update or remove the object.
 Items in the table without a *built_in_key* will not be modified or removed.
 
+BuiltInData is designed to address the data gray area between customer data and constants.
+It allows developers to deliver, update, and destroy data that is stored in the database.
+
 == Setup
 Add *built_in_key* to your model:
 

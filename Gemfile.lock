@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     built_in_data (0.0.1)
-      rails (~> 3.2.8)
+      rails (>= 3.1.0)
 
 GEM
   remote: http://rubygems.org/

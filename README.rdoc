@@ -12,6 +12,7 @@ It allows developers to deliver, update, and destroy data that is stored in the 
 Add *built_in_key* to your model:
 
     ruby script/rails generate migration AddBuiltInKeyToYourModel built_in_key:string
+    rake db:migrate
 
 Include *BuiltInData* in your model:
 
@@ -27,7 +28,7 @@ There are two methods to load data
       :glacier => {
         :name => 'Glacier National Park',
       },
-  
+
       :yellowstone => {
         :name => 'Yellowstone National Park',
       }

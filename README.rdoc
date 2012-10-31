@@ -35,7 +35,7 @@ There are two methods to load data
     })
 
 
-* Create a yaml load file in *db/built_in_data* with the name of the model (ie. national_parks.yml), and load the data with `YourModel.load_built_in_data!` without any arguments.
+* Create a yaml load file in *db/built_in_data* with the name of the model (ie. national_parks.yml), and load the data with <tt>YourModel.load_built_in_data!</tt> without any arguments.
 
     glacier:
       name: Glacier National Park

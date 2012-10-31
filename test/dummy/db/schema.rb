@@ -17,9 +17,9 @@ ActiveRecord::Schema.define(:version => 20121024201818) do
     t.string   "name"
     t.date     "established"
     t.string   "url"
-    t.string   "built_in_key"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.string   "built_in_key"
   end
 
 end

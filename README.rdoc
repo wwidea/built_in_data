@@ -23,8 +23,8 @@ Include *BuiltInData* in your model:
 Setup your data:
 There are two methods to load data
 
-* assign to *built_in_data_attributes*
-    YourModel.built_in_data_attributes = {
+* Pass as a hash to load_built_in_data!
+    YourModel.load_built_in_data!({
       :glacier => {
         :name => 'Glacier National Park',
       },
@@ -32,10 +32,10 @@ There are two methods to load data
       :yellowstone => {
         :name => 'Yellowstone National Park',
       }
-    }
+    })
 
 
-* OR create a yaml load file in *db/built_in_data* with the name of the model (ie. national_parks.yml)
+* Create a yaml load file in *db/built_in_data* with the name of the model (ie. national_parks.yml), and load the data with `YourModel.load_built_in_data!` without any arguments.
 
     glacier:
       name: Glacier National Park
@@ -43,7 +43,3 @@ There are two methods to load data
     yellowstone:
      name: Yellowstone National Park
 
-
-Load the data with *load_built_in_data!*:
-
-    YourModel.load_built_in_data!

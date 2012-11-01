@@ -58,6 +58,10 @@ class BuiltInDataTest < ActiveSupport::TestCase
       NationalPark.load_built_in_data!
     end
   end
+  
+  test "should process erb in yaml file" do
+    assert_equal '1910-05-11', NationalPark.send(:load_yaml_data)['glacier']['established'].to_s(:db)
+  end
 
 
   #######

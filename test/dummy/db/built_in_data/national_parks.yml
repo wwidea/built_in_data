@@ -5,5 +5,5 @@ yellowstone:
 
 glacier:
   name: Glacier National Park
-  established: 1910-05-11
+  established: <%= Date.parse('1910-05-11') %>
   url: 'http://www.nps.gov/glac/index.htm'

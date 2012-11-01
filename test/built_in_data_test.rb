@@ -5,7 +5,8 @@ class BuiltInDataTest < ActiveSupport::TestCase
     :test => {
       :name => 'Yellowstone National Park',
       :established => '1872-03-01',
-      :url => 'http://www.nps.gov/yell/index.htm'
+      :url => 'http://www.nps.gov/yell/index.htm',
+      :protected_attribute_column => 'protected data'
     }
   }
 
@@ -68,6 +69,14 @@ class BuiltInDataTest < ActiveSupport::TestCase
     assert_equal(2,parks.size)
     assert_equal(NationalPark,parks.first.class)
     assert_equal(false,parks.first.new_record?)
+  end
+
+  test 'should be able to update attributes that are protected' do
+    assert(HASH_DATA[:test].keys.include?(:protected_attribute_column))
+    assert_raise(ActiveModel::MassAssignmentSecurity::Error) do
+      NationalPark.create!(HASH_DATA[:test])
+    end
+    NationalPark.load_built_in_data!(HASH_DATA)
   end
 
   #######

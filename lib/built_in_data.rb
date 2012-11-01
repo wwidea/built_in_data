@@ -39,14 +39,26 @@ module BuiltInData
     def create_or_update!(key, attributes)
       attributes.merge!(:built_in_key => key.to_s)
 
-      object = find_by_built_in_key(key)
-      if object
-        object.update_attributes!(attributes)
-        object
-      else
-        result = create!(attributes)
-      end
+      object = find_or_initialize_by_built_in_key(key)
+      object.send(:built_in_data_attributes=,attributes)
+      return object
     end
 
+  end
+
+  ####################
+  # INSTANCE METHODS #
+  ####################
+
+  #######
+  private
+  #######
+
+  # Assign attributes bypassing mass assignment protections
+  def built_in_data_attributes=(attributes)
+    attributes.each do |attribute_name,value|
+      send("#{attribute_name}=",value)
+    end
+    save!
   end
 end

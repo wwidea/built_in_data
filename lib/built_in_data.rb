@@ -33,7 +33,7 @@ module BuiltInData
     end
 
     def load_yaml_data
-      YAML.load_file(Rails.root.join('db', 'built_in_data', "#{table_name}.yml"))
+      YAML.load(ERB.new(File.read(Rails.root.join('db', 'built_in_data', "#{table_name}.yml"))).result)
     end
 
     def create_or_update!(key, attributes)

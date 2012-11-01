@@ -58,11 +58,17 @@ class BuiltInDataTest < ActiveSupport::TestCase
       NationalPark.load_built_in_data!
     end
   end
-  
+
   test "should process erb in yaml file" do
     assert_equal '1910-05-11', NationalPark.send(:load_yaml_data)['glacier']['established'].to_s(:db)
   end
 
+  test 'should return active record objects from load' do
+    parks = NationalPark.load_built_in_data!
+    assert_equal(2,parks.size)
+    assert_equal(NationalPark,parks.first.class)
+    assert_equal(false,parks.first.new_record?)
+  end
 
   #######
   private

@@ -1,3 +1,5 @@
+{<img src="https://codeclimate.com/badge.png" />}[https://codeclimate.com/github/wwidea/built_in_data]
+
 =BuiltInData
 
 BuiltInData is a simple tool for loading and updating data in a Rails application.

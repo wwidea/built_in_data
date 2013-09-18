@@ -39,7 +39,7 @@ module BuiltInData
     def create_or_update!(key, attributes)
       attributes.merge!(:built_in_key => key.to_s)
 
-      object = find_or_initialize_by_built_in_key(key)
+      object = respond_to?(:find_or_initialize_by) ? find_or_initialize_by(built_in_key: key) : find_or_initialize_by_built_in_key(key)
       object.send(:built_in_data_attributes=,attributes)
       return object
     end

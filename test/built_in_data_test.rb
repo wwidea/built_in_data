@@ -2,11 +2,10 @@ require 'test_helper'
 
 class BuiltInDataTest < ActiveSupport::TestCase
   HASH_DATA = {
-    :test => {
-      :name => 'Yellowstone National Park',
-      :established => '1872-03-01',
-      :url => 'http://www.nps.gov/yell/index.htm',
-      :protected_attribute_column => 'protected data'
+    test: {
+      name:         'Yellowstone National Park',
+      established:  '1872-03-01',
+      url:          'http://www.nps.gov/yell/index.htm',
     }
   }
 

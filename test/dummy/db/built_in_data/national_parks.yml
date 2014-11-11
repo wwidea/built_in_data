@@ -2,9 +2,7 @@ yellowstone:
   name: Yellowstone National Park
   established: 1872-03-01
   url: 'http://www.nps.gov/yell/index.htm'
-  protected_attribute_column: 'protected data'
 glacier:
   name: Glacier National Park
   established: <%= Date.parse('1910-05-11') %>
   url: 'http://www.nps.gov/glac/index.htm'
-  protected_attribute_column: 'protected data'

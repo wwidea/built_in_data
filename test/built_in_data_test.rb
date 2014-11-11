@@ -71,14 +71,6 @@ class BuiltInDataTest < ActiveSupport::TestCase
     assert_equal(false,parks.first.new_record?)
   end
 
-  test 'should be able to update attributes that are protected' do
-    assert(HASH_DATA[:test].keys.include?(:protected_attribute_column))
-    assert_raise(ActiveModel::MassAssignmentSecurity::Error) do
-      NationalPark.create!(HASH_DATA[:test])
-    end
-    NationalPark.load_built_in_data!(HASH_DATA)
-  end
-
   #######
   private
   #######

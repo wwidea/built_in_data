@@ -24,9 +24,7 @@ module BuiltInData
       end
     end
 
-    #######
     private
-    #######
 
     def prepare_objects_hash(hash)
       return hash.nil? ? load_yaml_data : hash.with_indifferent_access
@@ -37,28 +35,10 @@ module BuiltInData
     end
 
     def create_or_update!(key, attributes)
-      attributes.merge!(:built_in_key => key.to_s)
-
-      object = find_or_initialize_by(built_in_key: key)
-      object.send(:built_in_data_attributes=, attributes)
-      return object
+      find_or_initialize_by(built_in_key: key).tap do |object|
+        object.attributes = attributes
+        object.save!
+      end
     end
-
-  end
-
-  ####################
-  # INSTANCE METHODS #
-  ####################
-
-  #######
-  private
-  #######
-
-  # Assign attributes bypassing mass assignment protections
-  def built_in_data_attributes=(attributes)
-    attributes.each do |attribute_name,value|
-      send("#{attribute_name}=",value)
-    end
-    save!
   end
 end

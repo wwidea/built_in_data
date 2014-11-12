@@ -1,6 +1,6 @@
-{<img src="https://codeclimate.com/badge.png" />}[https://codeclimate.com/github/wwidea/built_in_data]
-
 =BuiltInData
+
+{<img src="https://codeclimate.com/github/wwidea/built_in_data/badges/gpa.svg" />}[https://codeclimate.com/github/wwidea/built_in_data]
 
 BuiltInData is a simple tool for loading and updating data in a Rails application.
 
@@ -22,7 +22,7 @@ Include *BuiltInData* in your model:
       include BuiltInData
     end
 
-Setup your data:
+== Loading Data
 There are two methods to load data
 
 * Pass as a hash to load_built_in_data!
@@ -46,3 +46,8 @@ There are two methods to load data
     yellowstone:
      name: Yellowstone National Park
      established: 1872-03-01
+
+== Other
+Use *built_in?* to check if an object was loaded by BuiltInData:
+
+    object.built_in?

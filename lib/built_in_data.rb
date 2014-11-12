@@ -41,4 +41,8 @@ module BuiltInData
       end
     end
   end
+  
+  def built_in?
+    !built_in_key.blank?
+  end
 end

@@ -8,7 +8,15 @@ class BuiltInDataTest < ActiveSupport::TestCase
       url:          'http://www.nps.gov/yell/index.htm',
     }
   }
-
+  
+  test 'should return true for built_in?' do
+    assert_equal true, NationalPark.new(built_in_key: 'test').built_in?
+  end
+  
+  test 'should return false for built_in?' do
+    assert_equal false, NationalPark.new(built_in_key: '').built_in?
+  end
+  
   test "should load built in data" do
     assert_difference 'NationalPark.count' do
       load_hash_data
@@ -70,9 +78,7 @@ class BuiltInDataTest < ActiveSupport::TestCase
     assert_equal(false,parks.first.new_record?)
   end
 
-  #######
   private
-  #######
 
   def load_hash_data
     NationalPark.load_built_in_data!(HASH_DATA)

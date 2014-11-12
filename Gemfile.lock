@@ -84,4 +84,4 @@ PLATFORMS
 
 DEPENDENCIES
   built_in_data!
-  sqlite3 (~> 1.3.10)
+  sqlite3 (~> 1.3)

@@ -1,16 +1,10 @@
-#!/usr/bin/env rake
 begin
   require 'bundler/setup'
 rescue LoadError
   puts 'You must `gem install bundler` and `bundle install` to run rake tasks'
 end
-begin
-  require 'rdoc/task'
-rescue LoadError
-  require 'rdoc/rdoc'
-  require 'rake/rdoctask'
-  RDoc::Task = Rake::RDocTask
-end
+
+require 'rdoc/task'
 
 RDoc::Task.new(:rdoc) do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
@@ -20,12 +14,14 @@ RDoc::Task.new(:rdoc) do |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
+
+
+
 Bundler::GemHelper.install_tasks
 
 require 'rake/testtask'
 
 Rake::TestTask.new(:test) do |t|
-  system 'cd test/dummy; rake db:setup; rake db:test:prepare; cd ../../'
   t.libs << 'lib'
   t.libs << 'test'
   t.pattern = 'test/**/*_test.rb'
@@ -33,4 +29,4 @@ Rake::TestTask.new(:test) do |t|
 end
 
 
-task :default => :test
+task default: :test

@@ -31,7 +31,12 @@ module BuiltInData
     end
 
     def load_yaml_data
-      YAML.load(ERB.new(File.read(Rails.root.join('db', 'built_in_data', "#{table_name}.yml"))).result)
+      # allow a standard key to be used for doing defaults in YAML
+      YAML.load(read_and_erb_process_yaml_file).except('DEFAULTS')
+    end
+    
+    def read_and_erb_process_yaml_file
+      ERB.new(File.read(Rails.root.join('db', 'built_in_data', "#{table_name}.yml"))).result
     end
 
     def create_or_update!(key, attributes)

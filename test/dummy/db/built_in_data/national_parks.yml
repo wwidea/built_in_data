@@ -1,8 +1,13 @@
+DEFAULTS: &default_values
+  active: true
+
 yellowstone:
+  <<: *default_values
   name: Yellowstone National Park
   established: 1872-03-01
   url: 'http://www.nps.gov/yell/index.htm'
 glacier:
+  <<: *default_values
   name: Glacier National Park
   established: <%= Date.parse('1910-05-11') %>
   url: 'http://www.nps.gov/glac/index.htm'

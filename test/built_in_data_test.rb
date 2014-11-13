@@ -77,6 +77,11 @@ class BuiltInDataTest < ActiveSupport::TestCase
     assert_equal(NationalPark,parks.first.class)
     assert_equal(false,parks.first.new_record?)
   end
+  
+  test 'should load yaml defaults' do
+    NationalPark.load_built_in_data!
+    assert_equal true, NationalPark.find_by(name: 'Yellowstone National Park').active
+  end
 
   private
 

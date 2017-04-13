@@ -82,6 +82,11 @@ class BuiltInDataTest < ActiveSupport::TestCase
     NationalPark.load_built_in_data!
     assert_equal true, NationalPark.find_by(name: 'Yellowstone National Park').active
   end
+  
+  test 'should return built_in_data object database id' do
+    load_hash_data
+    assert_equal NationalPark.where(name: 'Yellowstone National Park').first.id, NationalPark.built_in_object_id(:test)
+  end
 
   private
 

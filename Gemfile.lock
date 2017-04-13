@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    built_in_data (1.0.2)
+    built_in_data (1.1.0)
       rails (>= 4.0.0)
 
 GEM

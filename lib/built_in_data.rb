@@ -24,6 +24,11 @@ module BuiltInData
       end
     end
 
+    # cached database id for fixture files
+    def built_in_object_id(key)
+      built_in_object_ids[key]
+    end
+
     private
 
     def prepare_objects_hash(hash)
@@ -43,6 +48,13 @@ module BuiltInData
       find_or_initialize_by(built_in_key: key).tap do |object|
         object.attributes = attributes
         object.save!
+      end
+    end
+    
+    # memoized hash of built in object ids
+    def built_in_object_ids
+      @built_in_object_ids ||= Hash.new do |hash, key|
+        hash[key] = where(built_in_key: key).pluck(:id).first
       end
     end
   end

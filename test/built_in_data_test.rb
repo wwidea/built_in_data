@@ -87,6 +87,13 @@ class BuiltInDataTest < ActiveSupport::TestCase
     load_hash_data
     assert_equal NationalPark.where(name: 'Yellowstone National Park').first.id, NationalPark.built_in_object_id(:test)
   end
+  
+  test 'should clear built_in_object_ids cache when delete_all is called' do
+    NationalPark.instance_variable_set('@built_in_object_ids', 'testing')
+    
+    NationalPark.delete_all
+    assert_nil NationalPark.instance_variable_get('@built_in_object_ids')
+  end
 
   private
 

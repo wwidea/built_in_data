@@ -29,6 +29,11 @@ module BuiltInData
       built_in_object_ids[key]
     end
 
+    def delete_all
+      @built_in_object_ids = nil
+      super
+    end
+
     private
 
     def prepare_objects_hash(hash)

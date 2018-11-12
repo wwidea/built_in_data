@@ -7,8 +7,8 @@ require "built_in_data/version"
 Gem::Specification.new do |s|
   s.name        = "built_in_data"
   s.version     = BuiltInData::VERSION
-  s.authors     = ['Aaron Baldwin', 'Jonathan S. Garvin', 'WWIDEA, Inc']
-  s.email       = ["developers@wwidea.org"]
+  s.authors     = ['Aaron Baldwin', 'Brightways Learning']
+  s.email       = ["developers@brightwayslearning.org"]
   s.homepage    = "https://github.com/wwidea/built_in_data"
   s.summary     = "Data management for Rails models."
   s.description = "BuiltInData is a simple tool for loading and updating data in a Rails application."

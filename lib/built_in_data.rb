@@ -3,7 +3,7 @@ module BuiltInData
 
   included do
     # all built in data objects should have a built_in_key, model objects without a key will not be modified or removed
-    validates_uniqueness_of :built_in_key, :allow_nil => true
+    validates_uniqueness_of :built_in_key, allow_nil: true, case_sensitive: false
 
     scope :built_in, -> { where "#{table_name}.built_in_key IS NOT NULL" }
   end
@@ -44,7 +44,7 @@ module BuiltInData
       # allow a standard key to be used for doing defaults in YAML
       YAML.load(read_and_erb_process_yaml_file).except('DEFAULTS')
     end
-    
+
     def read_and_erb_process_yaml_file
       ERB.new(File.read(Rails.root.join('db', 'built_in_data', "#{table_name}.yml"))).result
     end
@@ -55,7 +55,7 @@ module BuiltInData
         object.save!
       end
     end
-    
+
     # memoized hash of built in object ids
     def built_in_object_ids
       @built_in_object_ids ||= Hash.new do |hash, key|
@@ -63,7 +63,7 @@ module BuiltInData
       end
     end
   end
-  
+
   def built_in?
     !built_in_key.blank?
   end

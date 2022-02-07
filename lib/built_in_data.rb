@@ -41,8 +41,12 @@ module BuiltInData
     end
 
     def load_yaml_data
-      # allow a standard key to be used for doing defaults in YAML
-      YAML.load(read_and_erb_process_yaml_file).except('DEFAULTS')
+      # allow a standard key to be used for defaults in YAML files
+      YAML.safe_load(
+        read_and_erb_process_yaml_file,
+        permitted_classes:  [Date],
+        aliases:            true
+      ).except('DEFAULTS')
     end
 
     def read_and_erb_process_yaml_file

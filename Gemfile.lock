@@ -148,6 +148,7 @@ PLATFORMS
 
 DEPENDENCIES
   built_in_data!
+  nokogiri (>= 1.13.4)
   rails
   simplecov
   sqlite3

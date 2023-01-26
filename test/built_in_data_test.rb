@@ -8,15 +8,15 @@ class BuiltInDataTest < ActiveSupport::TestCase
       url:          'http://www.nps.gov/yell/index.htm',
     }
   }
-  
+
   test 'should return true for built_in?' do
     assert_equal true, NationalPark.new(built_in_key: 'test').built_in?
   end
-  
+
   test 'should return false for built_in?' do
     assert_equal false, NationalPark.new(built_in_key: '').built_in?
   end
-  
+
   test "should load built in data" do
     assert_difference 'NationalPark.count' do
       load_hash_data
@@ -68,7 +68,7 @@ class BuiltInDataTest < ActiveSupport::TestCase
   end
 
   test "should process erb in yaml file" do
-    assert_equal '1910-05-11', NationalPark.send(:load_yaml_data)['glacier']['established'].to_s(:db)
+    assert_equal '1910-05-11', NationalPark.send(:load_yaml_data)['glacier']['established'].to_fs(:db)
   end
 
   test 'should return active record objects from load' do
@@ -77,20 +77,20 @@ class BuiltInDataTest < ActiveSupport::TestCase
     assert_equal(NationalPark,parks.first.class)
     assert_equal(false,parks.first.new_record?)
   end
-  
+
   test 'should load yaml defaults' do
     NationalPark.load_built_in_data!
     assert_equal true, NationalPark.find_by(name: 'Yellowstone National Park').active
   end
-  
+
   test 'should return built_in_data object database id' do
     load_hash_data
     assert_equal NationalPark.where(name: 'Yellowstone National Park').first.id, NationalPark.built_in_object_id(:test)
   end
-  
+
   test 'should clear built_in_object_ids cache when delete_all is called' do
     NationalPark.instance_variable_set('@built_in_object_ids', 'testing')
-    
+
     NationalPark.delete_all
     assert_nil NationalPark.instance_variable_get('@built_in_object_ids')
   end

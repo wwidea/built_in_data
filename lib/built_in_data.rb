@@ -1,3 +1,5 @@
+require "built_in_data/version"
+
 module BuiltInData
   extend ActiveSupport::Concern
 

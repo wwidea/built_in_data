@@ -5,7 +5,7 @@ Gem::Specification.new do |spec|
   spec.name        = "built_in_data"
   spec.version     = BuiltInData::VERSION
   spec.authors     = ["Aaron Baldwin", "Brightways Learning"]
-  spec.email       = ["developers@brightwayslearning.org"]
+  spec.email       = ["baldwina@brightwayslearning.org"]
   spec.homepage    = "https://github.com/wwidea/built_in_data"
   spec.summary     = "Data management for Rails models."
   spec.description = "BuiltInData is a simple tool for loading and updating data in a Rails application."

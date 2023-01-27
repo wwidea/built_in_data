@@ -18,5 +18,11 @@ module Dummy
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Disable writing log files
+    unless ENV['RAILS_ENABLE_LOGGER']
+      config.logger     = ActiveSupport::Logger.new(nil)
+      config.log_level  = :fatal
+    end
   end
 end

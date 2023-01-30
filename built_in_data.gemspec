@@ -1,6 +1,5 @@
 require_relative "lib/built_in_data/version"
 
-# Describe your gem and declare its dependencies:
 Gem::Specification.new do |spec|
   spec.name        = "built_in_data"
   spec.version     = BuiltInData::VERSION

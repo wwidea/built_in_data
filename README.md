@@ -53,3 +53,6 @@ Use **built_in?** to check if an object was loaded by BuiltInData:
 ```ruby
 object.built_in?
 ```
+
+## License
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

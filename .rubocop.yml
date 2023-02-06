@@ -9,6 +9,10 @@ require:
 AllCops:
   NewCops: enable
   TargetRubyVersion: 2.7
+  Exclude:
+    - test/dummy/config/environments/*
+    - test/dummy/db/schema.rb
+    - test/dummy/tmp/**/*
 
 
 # Layout
@@ -27,6 +31,11 @@ Style/ClassAndModuleChildren:
 
 Style/Documentation:
   Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - db/migrate/*
+    - test/dummy/db/migrate/*
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes

@@ -37,5 +37,9 @@ Style/FrozenStringLiteralComment:
     - db/migrate/*
     - test/dummy/db/migrate/*
 
+Style/StringConcatenation:
+  Exclude:
+    - test/test_helper.rb
+
 Style/StringLiterals:
   EnforcedStyle: double_quotes

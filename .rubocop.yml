@@ -24,6 +24,12 @@ Layout/LineLength:
   Max: 200
 
 
+# Packaging
+Packaging/BundlerSetupInTests:
+  Exclude:
+    - test/dummy/config/boot.rb
+
+
 # Style
 Style/ClassAndModuleChildren:
   Exclude:

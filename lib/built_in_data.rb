@@ -50,11 +50,11 @@ module BuiltInData
         read_and_erb_process_yaml_file,
         permitted_classes:  [Date],
         aliases:            true
-      ).except('DEFAULTS')
+      ).except("DEFAULTS")
     end
 
     def read_and_erb_process_yaml_file
-      ERB.new(File.read(Rails.root.join('db', 'built_in_data', "#{table_name}.yml"))).result
+      ERB.new(File.read(Rails.root.join("db", "built_in_data", "#{table_name}.yml"))).result
     end
 
     def create_or_update!(key, attributes)

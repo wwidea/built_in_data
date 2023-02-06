@@ -21,9 +21,7 @@ module BuiltInData
         end
 
         # destroy any built_in objects that have been removed from built_in_data_attributes
-        built_in.each do |object|
-          object.destroy unless objects_hash.key?(object.built_in_key)
-        end
+        built_in.where.not(built_in_key: objects_hash.keys).destroy_all
       end
     end
 

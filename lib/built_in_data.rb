@@ -15,15 +15,14 @@ module BuiltInData
   module ClassMethods
     def load_built_in_data!(hash = nil)
       objects_hash = prepare_objects_hash(hash)
-      Array.new.tap do |updated_objects|
-
+      [].tap do |updated_objects|
         objects_hash.each do |key, attributes|
           updated_objects << create_or_update!(key, attributes)
         end
 
         # destroy any built_in objects that have been removed from built_in_data_attributes
-        self.built_in.each do |object|
-          object.destroy unless objects_hash.has_key?(object.built_in_key)
+        built_in.each do |object|
+          object.destroy unless objects_hash.key?(object.built_in_key)
         end
       end
     end
@@ -41,20 +40,20 @@ module BuiltInData
     private
 
     def prepare_objects_hash(hash)
-      return hash.nil? ? load_yaml_data : hash.with_indifferent_access
+      hash.nil? ? load_yaml_data : hash.with_indifferent_access
     end
 
     def load_yaml_data
       # allow a standard key to be used for defaults in YAML files
       YAML.safe_load(
         read_and_erb_process_yaml_file,
-        permitted_classes:  [Date],
-        aliases:            true
+        permitted_classes: [Date],
+        aliases:           true
       ).except("DEFAULTS")
     end
 
     def read_and_erb_process_yaml_file
-      ERB.new(File.read(Rails.root.join("db", "built_in_data", "#{table_name}.yml"))).result
+      ERB.new(Rails.root.join("db", "built_in_data", "#{table_name}.yml").read).result
     end
 
     def create_or_update!(key, attributes)
@@ -67,12 +66,12 @@ module BuiltInData
     # memoized hash of built in object ids
     def built_in_object_ids
       @built_in_object_ids ||= Hash.new do |hash, key|
-        hash[key] = where(built_in_key: key).pluck(:id).first
+        hash[key] = where(built_in_key: key).pick(:id)
       end
     end
   end
 
   def built_in?
-    !built_in_key.blank?
+    built_in_key.present?
   end
 end

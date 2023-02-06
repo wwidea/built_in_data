@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "built_in_data/version"
 
 module BuiltInData

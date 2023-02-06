@@ -49,3 +49,7 @@ Style/StringConcatenation:
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
+
+Style/SymbolArray:
+  Exclude:
+    - test/dummy/config/initializers/filter_parameter_logging.rb

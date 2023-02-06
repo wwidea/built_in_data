@@ -1,32 +1,29 @@
+# frozen_string_literal: true
+
 require "built_in_data/version"
 
 module BuiltInData
   extend ActiveSupport::Concern
 
   included do
-    # all built in data objects should have a built_in_key, model objects without a key will not be modified or removed
+    # All built in data objects should have a built_in_key, model objects without a key will not be modified or removed
     validates_uniqueness_of :built_in_key, allow_nil: true, case_sensitive: false
 
-    scope :built_in, -> { where "#{table_name}.built_in_key IS NOT NULL" }
+    scope :built_in, -> { where.not(built_in_key: nil) }
   end
 
   module ClassMethods
+    # Inserts new, updates existing, and destorys removed built_in objects
     def load_built_in_data!(hash = nil)
       objects_hash = prepare_objects_hash(hash)
-      Array.new.tap do |updated_objects|
+      destroy_removed_built_in_objects!(objects_hash.keys)
 
-        objects_hash.each do |key, attributes|
-          updated_objects << create_or_update!(key, attributes)
-        end
-
-        # destroy any built_in objects that have been removed from built_in_data_attributes
-        self.built_in.each do |object|
-          object.destroy unless objects_hash.has_key?(object.built_in_key)
-        end
+      objects_hash.map do |key, attributes|
+        create_or_update!(key, attributes)
       end
     end
 
-    # cached database id for fixture files
+    # Cached database id for fixture files
     def built_in_object_id(key)
       built_in_object_ids[key]
     end
@@ -39,20 +36,25 @@ module BuiltInData
     private
 
     def prepare_objects_hash(hash)
-      return hash.nil? ? load_yaml_data : hash.with_indifferent_access
+      hash.nil? ? load_yaml_data : hash.with_indifferent_access
     end
 
     def load_yaml_data
       # allow a standard key to be used for defaults in YAML files
       YAML.safe_load(
         read_and_erb_process_yaml_file,
-        permitted_classes:  [Date],
-        aliases:            true
-      ).except('DEFAULTS')
+        permitted_classes: [Date],
+        aliases:           true
+      ).except("DEFAULTS")
     end
 
     def read_and_erb_process_yaml_file
-      ERB.new(File.read(Rails.root.join('db', 'built_in_data', "#{table_name}.yml"))).result
+      ERB.new(Rails.root.join("db", "built_in_data", "#{table_name}.yml").read).result
+    end
+
+    # Destroys built_in objects with a built_in_key not present in built_in_keys array
+    def destroy_removed_built_in_objects!(built_in_keys)
+      built_in.where.not(built_in_key: built_in_keys).destroy_all
     end
 
     def create_or_update!(key, attributes)
@@ -62,15 +64,15 @@ module BuiltInData
       end
     end
 
-    # memoized hash of built in object ids
+    # Memoized hash of built in object ids
     def built_in_object_ids
       @built_in_object_ids ||= Hash.new do |hash, key|
-        hash[key] = where(built_in_key: key).pluck(:id).first
+        hash[key] = where(built_in_key: key).pick(:id)
       end
     end
   end
 
   def built_in?
-    !built_in_key.blank?
+    built_in_key.present?
   end
 end

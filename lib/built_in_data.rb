@@ -9,7 +9,7 @@ module BuiltInData
     # all built in data objects should have a built_in_key, model objects without a key will not be modified or removed
     validates_uniqueness_of :built_in_key, allow_nil: true, case_sensitive: false
 
-    scope :built_in, -> { where "#{table_name}.built_in_key IS NOT NULL" }
+    scope :built_in, -> { where.not(built_in_key: nil) }
   end
 
   module ClassMethods

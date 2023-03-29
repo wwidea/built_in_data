@@ -13,5 +13,4 @@ gem "rubocop-minitest",     require: false
 gem "rubocop-packaging",    require: false
 gem "rubocop-performance",  require: false
 gem "rubocop-rails",        require: false
-gem "ruby-lsp"
 gem "sqlite3"

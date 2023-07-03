@@ -75,12 +75,8 @@ class BuiltInDataTest < ActiveSupport::TestCase
     assert_equal "1910-05-11", NationalPark.send(:load_yaml_data)["glacier"]["established"].to_fs(:db)
   end
 
-  test "should return active record objects from load" do
-    parks = NationalPark.load_built_in_data!
-
-    assert_equal  2,            parks.size
-    assert_equal  NationalPark, parks.first.class
-    assert_not    parks.first.new_record?
+  test "should return persisted active record objects" do
+    assert_equal [true, true], NationalPark.load_built_in_data!.map(&:persisted?)
   end
 
   test "should load yaml defaults" do

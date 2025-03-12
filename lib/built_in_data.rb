@@ -13,7 +13,7 @@ module BuiltInData
   end
 
   module ClassMethods
-    # Inserts new, updates existing, and destorys removed built_in objects
+    # Inserts new, updates existing, and destroys removed built_in objects
     def load_built_in_data!(hash = nil)
       objects_hash = prepare_objects_hash(hash)
       destroy_removed_built_in_objects!(objects_hash.keys)

@@ -1,7 +1,5 @@
 # BuiltInData
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/02eb42a4a53414adae01/maintainability)](https://codeclimate.com/github/wwidea/built_in_data/maintainability)
-
 BuiltInData is a simple tool for loading and updating data in a Rails application.
 
 Objects are stored in the database with a **built_in_key** that is used on subsequent loads to update or remove the object. Items in the table without a **built_in_key** will not be modified or removed.

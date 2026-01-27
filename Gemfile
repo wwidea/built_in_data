@@ -8,7 +8,6 @@ gemspec
 
 gem "guard"
 gem "guard-shell"
-gem "rails"
 gem "rubocop-minitest",     require: false
 gem "rubocop-packaging",    require: false
 gem "rubocop-performance",  require: false

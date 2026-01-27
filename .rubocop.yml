@@ -8,11 +8,16 @@ plugins:
 
 AllCops:
   NewCops: enable
-  TargetRubyVersion: 3.1
+  TargetRubyVersion: 3.3
+  SuggestExtensions: false
   Exclude:
+    - bin/*
+    - Guardfile
+    - db/migrate/*
     - test/dummy/config/environments/*
     - test/dummy/db/schema.rb
     - test/dummy/tmp/**/*
+    - vendor/bundle/**/*
 
 
 # Layout
